@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%for ob in user%}
+   {{ob.username}} 
+   <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+    {%endfor%}
+    <a href = "{%url 'blogapp:home' %}"><p><b>Home</b></p></a>
+</body>
+</html>
