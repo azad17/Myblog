@@ -15,6 +15,7 @@
     {%if ob.is_superuser%}
     <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
     {%else%}
+    <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a> &nbsp;
     <a href ="{%url 'blogapp:admin_invites' ob.pk%}"> Make Admin</a><br>
     {%endif%}
     {% endif%}
