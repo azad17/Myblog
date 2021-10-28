@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
 from .forms import UserForm
@@ -26,9 +26,11 @@ def register(request):
     return render(request,'blogapp/register.html',{'form':form})
 
 def login(request):
-    if request.method=='POST':       
+    if request.method=='POST':     
+        print("yes")  
         username = request.POST['username']
         password = request.POST['password']
+        print(username,password)
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
@@ -65,4 +67,15 @@ class UserDelete(DeleteView):
     template_name  = 'blogapp/userdelete.html'
     context_object_name='user'
     success_url = reverse_lazy('blogapp:userlist')
-            
+
+@login_required            
+def admin_invites(request,pk):
+    user = User.objects.get(pk=pk)
+    user.is_superuser=True
+    user.is_admin = True
+    user.is_staff = True
+    user.save();
+    return redirect('blogapp:userlist')
+
+    
+

@@ -7,9 +7,17 @@
     <title>Document</title>
 </head>
 <body>
+    
     {%for ob in user%}
    {{ob.username}} 
-   <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+   
+   {%if request.user.is_superuser%}
+    {%if ob.is_superuser%}
+    <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+    {%else%}
+    <a href ="{%url 'blogapp:admin_invites' ob.pk%}"> Make Admin</a><br>
+    {%endif%}
+    {% endif%}
     {%endfor%}
     <a href = "{%url 'blogapp:home' %}"><p><b>Home</b></p></a>
 </body>
