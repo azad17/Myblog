@@ -1,6 +1,6 @@
+{%extends 'blogapp/base.html'%}
 {%load static%}
-<!doctype html>
-<html lang="en">
+{%block content%}
   <head>
   	<title>Login 01</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login </h2>
+					<h2 class="heading-section">Sign Up </h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -27,7 +27,7 @@
 		      	<div class="icon d-flex align-items-center justify-content-center">
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
-		      	<h3 class="text-center mb-4">Sign In</h3>
+		      	<h3 class="text-center mb-4">Register</h3>
 						
                   
                   <form action="" method="post" class="login-form">
@@ -35,10 +35,13 @@
                        
                         
 		      		<div class="form-group">
-		      			<input type="text" class="form-control rounded-left" name='username' placeholder="Username" required>
+						Username {{form.username}}
 		      		</div>
-	            <div class="form-group d-flex">
-	              <input type="password" class="form-control rounded-left" name ='password'placeholder="Password" required>
+	            <div class="form-group d-flex"  >
+					    Email &emsp; &emsp;{{form.email}}
+	            </div>
+				<div class="form-group d-flex">
+					<label>password</label> &nbsp;&nbsp; &nbsp; {{form.password}}
 	            </div>
 	            <div class="form-group">
 	            	<input type="submit" value = "Login" class="form-control btn btn-primary rounded submit px-3"></button>
@@ -48,7 +51,7 @@
 	            		
 								</div>
 								<div class="w-50 text-md-right">
-									<a href="{%url 'blogapp:register' %}">Register</a>
+									<a href="{%url 'blogapp:login' %}">Login</a>
 								</div>
 	            </div>
 	          </form>
@@ -63,6 +66,5 @@
   <script src="{% static 'blogapp/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'blogapp/js/main.js' %}"></script>
 
-	</body>
-</html>
+{%endblock%}
 

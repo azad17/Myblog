@@ -10,7 +10,7 @@ class UserForm(ModelForm):
     
     class Meta:
         model = User
-        fields = ('username','email','password','is_superuser')
+        fields = ('username','email','password')
         widgets = {'password':forms.PasswordInput()}
     
     def save(self):
@@ -18,12 +18,7 @@ class UserForm(ModelForm):
         password = self.cleaned_data.get('password')
         email = self.cleaned_data.get('email')
         user = User.objects.create_user(username=username,email=email,password=password)        
-        admin = self.cleaned_data.get('is_superuser')
+        
         user.save()        
         
-        if admin:   
-                user = User.objects.get(username=username)
-                user.is_superuser = True
-                user.is_staff = True
-                user.is_admin = True
-                user.save();
+        

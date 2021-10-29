@@ -11,4 +11,5 @@ urlpatterns = [
     path('userdelete/<int:pk>/',views.UserDelete.as_view(),name='userdelete'),
     path("logout",views.user_logout,name='logout'),
     path('admin_invites/<int:pk>/',views.admin_invites,name='admin_invites'),
+    
 ]

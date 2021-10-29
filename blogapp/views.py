@@ -78,4 +78,3 @@ def admin_invites(request,pk):
     return redirect('blogapp:userlist')
 
     
-
