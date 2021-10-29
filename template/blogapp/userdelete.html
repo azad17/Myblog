@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends 'blogapp/base.html'%}
+{%load static%}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,11 @@
     <title>Document</title>
 
 </head>
-<body>
+{%block content%}
+
     <form action="" method="post">
         {%csrf_token%}
     Do you want to delete {{user}} ?
     <input type="submit" value="Delete">
 </form>
-</body>
-</html>
+{%endblock%}

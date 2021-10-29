@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends 'blogapp/base.html'%}
+{%load static%}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,42 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< HEAD
+{%block content%}    
     {%for ob in user%}
+=======
+    
+      {%for ob in user%}
+>>>>>>> 6cc55ab5bedf5f2d42dc7f559fc8bb29ca511572
    {{ob.username}} 
-   <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+   
+   {%if request.user.is_superuser%}
+    {%if ob.is_superuser%}
+<<<<<<< HEAD
+        <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+    %else%}
+        <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a> &nbsp;
+        <a href ="{%url 'blogapp:admin_invites' ob.pk%}"> Make Admin</a><br>
+    {%endif%}
+   {%else%}
+        <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+   {% endif%}
+    
+    {%endfor%}
+    <a href = "{%url 'blogapp:home' %}"><p><b>Home</b></p></a>
+{%endblock%}
+
+=======
+    <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+    {%else%}
+    <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a> &nbsp;
+    <a href ="{%url 'blogapp:admin_invites' ob.pk%}"> Make Admin</a><br>
+    {%endif%}
+    {%else%}
+    <a href ="{%url 'blogapp:userdetails' ob.pk%}"> details</a><br>
+    {% endif%}
     {%endfor%}
     <a href = "{%url 'blogapp:home' %}"><p><b>Home</b></p></a>
 </body>
 </html>
+>>>>>>> 6cc55ab5bedf5f2d42dc7f559fc8bb29ca511572

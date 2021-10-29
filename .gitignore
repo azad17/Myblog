@@ -1,1 +1,12 @@
-__pycache__/
+.idea/
+*.pyc
+*.log
+*.pid
+*.dump
+static/
+media/
+.env
+db.sqlite3
+.python-version
+.coverage
+coverage.xml
