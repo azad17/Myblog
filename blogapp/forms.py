@@ -18,7 +18,12 @@ class UserForm(ModelForm):
         password = self.cleaned_data.get('password')
         email = self.cleaned_data.get('email')
         user = User.objects.create_user(username=username,email=email,password=password)        
+<<<<<<< HEAD
         
         user.save()        
         
         
+=======
+        
+        user.save()     
+>>>>>>> 6cc55ab5bedf5f2d42dc7f559fc8bb29ca511572
