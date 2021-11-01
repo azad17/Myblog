@@ -8,7 +8,16 @@
     <title>Document</title>
 </head>
 {%block content%}
+<p>
+{%if user.is_authenticated%}
   Welcome {{request.user}}  <br>
+  
   <a href="{% url 'blogapp:logout' %}"> <b>Logout</b></a>
+  
+  {%if request.user.is_superuser%}
   <a href="{% url 'blogapp:userlist'%}"><b>See users</a>
+    {%endif%}
+{%else%}
+<a href="{% url 'blogapp:login' %}"> Login First</a>
+{%endif%}    
 {%endblock%}

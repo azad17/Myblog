@@ -17,6 +17,7 @@
 
 	</head>
 	
+	
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -31,6 +32,9 @@
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
 		      	<h3 class="text-center mb-4">Sign In</h3>
+				  {%for msg in messages%}
+	{{msg}}
+	{%endfor%}
 						<form action="" method="post" class="login-form">
 						{%csrf_token%}	
 		      		<div class="form-group">
@@ -43,10 +47,13 @@
 	            	<input type="submit" value = "Login" class="form-control btn btn-primary rounded submit px-3"></button>
 	            </div>
 	            <div class="form-group d-md-flex">
-	            	<div class="w-50">
+	            	
+					<div class="w-50">
 	            		
 								</div>
-								<div class="w-50 text-md-right">
+								
+								<br><div class="w-50 text-md-right">
+									<a href="{%url 'blogapp:forgot_pass' %}">Forgot Password</a>
 									<a href="{%url 'blogapp:register' %}">Register</a>
 								</div>
 	            </div>

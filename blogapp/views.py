@@ -1,3 +1,4 @@
+from django import conf
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
@@ -11,6 +12,8 @@ from django.contrib.auth import login, authenticate,logout
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
+
+
 # Create your views here.
 
 def home(request):
@@ -19,27 +22,48 @@ def home(request):
 def register(request):
     form = UserForm()
     if request.method=='POST':
-        form = UserForm(request.POST)
+        form = UserForm(request.POST)        
         if form.is_valid():
             form.save()
-            return redirect('blogapp:login')       
+            return redirect('blogapp:login')
     return render(request,'blogapp/register.html',{'form':form})
 
 def login(request):
-    if request.method=='POST':     
-        print("yes")  
+    if request.method=='POST':      
         username = request.POST['username']
         password = request.POST['password']
-        print(username,password)
         user = auth.authenticate(username=username,password=password)
         if user is not None:
-            auth.login(request,user)
-            print(user)           
+            auth.login(request,user)                      
             return redirect('blogapp:home')
         else:
             messages.info(request,'Username/Password is Incorrect')
             redirect('blogapp:login')
     return render(request,'blogapp/login.html')  
+
+def forgot_pass(request):
+    if request.method=='POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        newpassword= request.POST.get('newpassword') 
+        confirmpassword = request.POST.get('confirmpassword') 
+        try:
+            user = User.objects.get(username=username,email=email)
+        except:
+            messages.info(request,"couldn't find user")
+            return redirect('blogapp:forgot_pass') 
+        if user is not None:
+            if newpassword!=confirmpassword:
+                messages.info(request,'Password not matching') 
+                return redirect('blogapp:forgot_pass')  
+            if len(newpassword)<7 or not any(pas.isdigit() for pas in newpassword) or not any(pas.isalpha() for pas in newpassword):
+                messages.info(request,'Password should have a length of 8 and contains alphanumeric values') 
+                return redirect('blogapp:forgot_pass')    
+            user.set_password(newpassword)
+            user.save();
+            messages.info(request,'Password has been changed')
+            return redirect('blogapp:login')             
+    return render(request,'blogapp/forgot_pass.html')
 
 def user_logout(request):
     logout(request)
