@@ -1,10 +1,20 @@
 {%extends 'blogapp/base.html'%}
 {%load static%}
 
-{%block content%}  
-    Name :{{user.username}}<br>
-    Admin :{{user.is_superuser}}<br>
-    <a href = "{%url 'blogapp:userupdate' user.pk%}">Update</a>
+{%block content%}
+
+<section class="pt-5 pb-5">
+    
+    <div class="container">
+        <h1><b> User Details</b></h1>
+       
+   <b>Name :{{user.username}}</b><br>
+    <b>Admin Status:{{user.is_superuser}}</b><br>
+    <a href = "{%url 'blogapp:userupdate' user.pk%}"><n>Update</b</a>
     <a href = "{%url 'blogapp:userdelete' user.pk%}">Delete</a><br>
     <a href = "{% url 'blogapp:userlist'%}">Back</a>
+</div>
+</div>
+
+</sectio
 {%endblock%}

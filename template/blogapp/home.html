@@ -10,14 +10,22 @@
 {%block content%}
 <p>
 {%if user.is_authenticated%}
-  Welcome {{request.user}}  <br>
+<section class="pt-5 pb-5">
+    
+  <div class="container">
+     
+      
+  <h1><b>Welcome {{request.user}}</b></h1>  <br>
   
-  <a href="{% url 'blogapp:logout' %}"> <b>Logout</b></a>
+ 
   
   {%if request.user.is_superuser%}
-  <a href="{% url 'blogapp:userlist'%}"><b>See users</a>
+  <a href="{% url 'blogapp:userlist'%}"><b>See users</a> <br>
     {%endif%}
 {%else%}
 <a href="{% url 'blogapp:login' %}"> Login First</a>
 {%endif%}    
+<a href="{% url 'blogapp:logout' %}"> <b>Logout</b></a>
+</div>
+</section>
 {%endblock%}

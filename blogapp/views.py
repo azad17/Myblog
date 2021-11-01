@@ -50,7 +50,7 @@ def forgot_pass(request):
         try:
             user = User.objects.get(username=username,email=email)
         except:
-            messages.info(request,"couldn't find user")
+            messages.info(request,"Couldn't find user")
             return redirect('blogapp:forgot_pass') 
         if user is not None:
             if newpassword!=confirmpassword:
