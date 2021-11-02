@@ -26,6 +26,8 @@ class UserForm(ModelForm):
         password = self.cleaned_data.get('password')
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
+        if not username[0].isalpha():
+            raise forms.ValidationError('Username Should start with Letter')
         if len(password)<7 or not any(pas.isdigit() for pas in password) or not any(pas.isalpha() for pas in password):          
                 raise forms.ValidationError("password should have a leangth of 8 and contains alphanumeric values")
         if password!=confirm_password:

@@ -1,0 +1,55 @@
+{%extends 'startblog/base.html'%}
+{%load static%}
+{%block content%}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container text-center text-md-left" data-aos="fade-up">
+      <h1>Welcome to <span>U-Blog</span></h1>
+      <h2>Share Your idea with the Universe</h2>
+      <a href="{%url 'startblog:add_blog'%}" class="btn-get-started scrollto">Start a Blog</a>
+    </div>
+  </section><!-- End Hero -->
+
+  <section id="" class="">
+    <div class="container">
+
+      <div class="">
+        <h2>Feeds</h2>
+        <p>Take a look</p>
+      </div>
+      </div>
+      </section>
+
+          <p><!-- ======= About Section ======= -->
+            {%for ob in blog%}
+            
+            <section id="about" class="about">
+              <div class="container">
+        
+                <div class="row">
+                  <div class="col-lg-6">
+                    <img src="{{ob.coverpic.url}}" class="img-fluid" alt="">
+                  </div>
+                  <div class="col-lg-6 pt-4 pt-lg-0">
+                    <h3>{{ob.title}}</h3>
+                    <h8> <b>By: {{ob.bloger}}</b></h8>
+                    <p>
+                     {{ob.content}}
+                    </p>
+                    
+                  </div>
+                </div>
+        
+              </div>
+            </section><!-- End About Section -->
+            {%endfor%}
+          
+        
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+  {%endblock%}
+ 
