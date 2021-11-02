@@ -5,6 +5,7 @@
   	<title>Login 01</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
@@ -28,13 +29,17 @@
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
 		      	<h3 class="text-center mb-4">Register</h3>
-						
+				  {% load crispy_forms_tags %} 
                   
                   <form action="" method="post" class="login-form">
 						{%csrf_token%}
                        
-                        
-		      		<div class="form-group">
+                        {%for message in messages%}
+						
+						{{message}}
+						{%endfor%}
+						{{form|crispy}}
+		      		<!-- <div class="form-group">
 						Username {{form.username}}
 		      		</div>
 	            <div class="form-group d-flex"  >
@@ -43,8 +48,11 @@
 				<div class="form-group d-flex">
 					<label>password</label> &nbsp;&nbsp; &nbsp; {{form.password}}
 	            </div>
+				<div class="form-group d-flex">
+					<label>Confirm password</label> &nbsp;&nbsp; &nbsp; {{form.confirm_password}}
+	            </div> -->
 	            <div class="form-group">
-	            	<input type="submit" value = "Login" class="form-control btn btn-primary rounded submit px-3"></button>
+	            	<input type="submit" value = "Register" class="form-control btn btn-primary rounded submit px-3"></button>
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">

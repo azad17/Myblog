@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .import views
 app_name = 'blogapp'
 urlpatterns = [
@@ -11,5 +12,6 @@ urlpatterns = [
     path('userdelete/<int:pk>/',views.UserDelete.as_view(),name='userdelete'),
     path("logout",views.user_logout,name='logout'),
     path('admin_invites/<int:pk>/',views.admin_invites,name='admin_invites'),
+    path('forgot_pass/',views.forgot_pass,name='forgot_pass')
     
 ]

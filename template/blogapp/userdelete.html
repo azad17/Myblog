@@ -9,10 +9,15 @@
 
 </head>
 {%block content%}
+<section class="pt-5 pb-5">
+    
+    <div class="container">
 
     <form action="" method="post">
         {%csrf_token%}
-    Do you want to delete {{user}} ?
+    <h2><b>Do you want to delete</b></h2> <h2>{{user}} ?</h2>
     <input type="submit" value="Delete">
 </form>
+</div>
+</section>
 {%endblock%}
