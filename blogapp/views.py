@@ -41,30 +41,6 @@ def login(request):
             redirect('blogapp:login')
     return render(request,'blogapp/login.html')  
 
-def forgot_pass(request):
-    if request.method=='POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        newpassword= request.POST.get('newpassword') 
-        confirmpassword = request.POST.get('confirmpassword') 
-        try:
-            user = User.objects.get(username=username,email=email)
-        except:
-            messages.info(request,"Couldn't find user")
-            return redirect('blogapp:forgot_pass') 
-        if user is not None:
-            if newpassword!=confirmpassword:
-                messages.info(request,'Password not matching') 
-                return redirect('blogapp:forgot_pass')  
-            if len(newpassword)<7 or not any(pas.isdigit() for pas in newpassword) or not any(pas.isalpha() for pas in newpassword):
-                messages.info(request,'Password should have a length of 8 and contains alphanumeric values') 
-                return redirect('blogapp:forgot_pass')    
-            user.set_password(newpassword)
-            user.save();
-            messages.info(request,'Password has been changed')
-            return redirect('blogapp:login')             
-    return render(request,'blogapp/forgot_pass.html')
-
 def user_logout(request):
     logout(request)
     return redirect('blogapp:login')
