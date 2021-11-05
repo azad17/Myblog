@@ -81,10 +81,18 @@ class  UserDetails(DetailView):
 
 class UserUpdate(UpdateView):
     model = User
-    fields = ('username','email','is_superuser')
+    fields = ('username','email')
     template_name = 'blogapp/userupdate.html'    
     def get_success_url(self):
         return reverse_lazy('blogapp:userdetails',kwargs = {'pk':self.object.id})
+
+class AdminUpdate(UpdateView):
+    model = User
+    exclude = ('password',)
+    fields = ('username','first_name','last_name','is_superuser','email','is_staff','user_permissions')    
+    template_name = 'blogapp/adminupdate.html'    
+    def get_success_url(self):
+        return reverse_lazy('blogapp:home')
 
 class UserDelete(DeleteView):
     model = User

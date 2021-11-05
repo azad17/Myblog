@@ -1,5 +1,6 @@
 {%extends 'startblog/base.html'%}
 {%load static%}
+{%load widget_tweaks%}
 {%block content%}
 {%load crispy_forms_tags%}
 body {
@@ -7,16 +8,17 @@ body {
 }
 <section class="ftco-section">
     <div class="container">
+        <div class="col col-lg-3">
         <form action="" method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-
-       
+          {{request.user}}
+            {%csrf_token%}       
             {{form|crispy}} 
-            <input type="submit" value = 'Submit'>
+            
+            <label>Choose images to upload</label>
+            <input type="file" name='images' multiple><br>
+           <br><button class="btn btn-secondary" type="submit" >Submit</buttonc>
         </form> 
     </div>
+    </div>
 </section>
-
-
-
 {%endblock%}

@@ -1,8 +1,4 @@
 {%load static%}
-
-
-
-
   <!-- Favicons -->
   <link href="{% static 'startblog/assets/img/favicon.png' %}" rel="icon">
   <link href="{% static 'startblog/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -20,20 +16,10 @@
   <!-- Template Main CSS File -->   
   <link href="{% static 'startblog/assets/css/style.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Lumia - v4.6.0
-  * Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-
-
-
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
-
+        
       <div class="logo me-auto">
         <h1><a href="{%url 'startblog:home'%}">U-Blog</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -52,8 +38,11 @@
           {%if request.user.is_superuser%}
           <li><a class="nav-link scrollto" href="{%url 'blogapp:home'%}">Admin page</a></li>
           {%endif%}
-          <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+          {%if request.user.is_authenticated%}
+          <li><a class="nav-link scrollto" href="{%url 'startblog:user_profile' %}">Profile</a></li>
+          {%endif%}
+
+          <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
