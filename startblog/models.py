@@ -11,8 +11,17 @@ class Blogs(models.Model):
     def __str__(self):
         return str(self.title)
 
+class Likes(models.Model):
+    post = models.ForeignKey(Blogs,on_delete=models.CASCADE)
+    like_status = models.BooleanField(default=False)
+    liked_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return str(self.like_status)
+
 class Gallery(models.Model):
     blog = models.ForeignKey(Blogs,on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='galery')  
     def __str__(self):
         return str(self.blog)      
+

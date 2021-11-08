@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import UpdateView
-from startblog.models import Blogs, Gallery
+from startblog.models import Blogs, Gallery,Likes
 from .forms import  BlogsForm, GalleryForm
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -12,13 +12,13 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-
+from django.db.models import Exists,OuterRef
 # Create your views here.
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('blogapp:login')
-    blog = Blogs.objects.filter(Q(personal=False)|Q(bloger=request.user))
+    blog = Blogs.objects.annotate (is_liked = Exists(Likes.objects.filter(liked_user=request.user,like_status=True,post_id=OuterRef('pk')))).all()
     context = {'blog':blog}
     return render (request,'startblog/bloghome.html',context)
 
@@ -103,3 +103,20 @@ def password_reset_request(request):
 					return redirect ("/password_reset/done/")
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="passwords/password_reset.html", context={"password_reset_form":password_reset_form})
+
+def add_like(request,pk):
+    blog = Blogs.objects.get(pk=pk)  
+    if request.method =='POST':
+        if request.POST.get('like')=='like':
+            like =Likes.objects.filter(post=blog,like_status=False,liked_user=request.user)   
+            if like:
+                like.update(like_status = True)
+            else:
+                like = Likes.objects.create(post=blog,like_status=True,liked_user=request.user)
+                return redirect('startblog:home')
+        if request.POST.get('like')=='unlike':
+            post = Likes.objects.get(post=blog,liked_user=request.user)
+            print(post)
+            post.like_status = False
+            post.save();
+    return redirect('startblog:home')             

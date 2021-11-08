@@ -11,7 +11,8 @@ urlpatterns = [
     path('user_profile',views.user_profile,name='user_profile'),
     path('pass_change',auth_views.PasswordChangeView.as_view(template_name='startblog/pass-change.html'),name='pass_change'),
     path('image_delete/<int:pk>/',views.image_delete,name='image_delete'),
-    path("password_reset", views.password_reset_request, name="password_reset"),
+    path('password_reset', views.password_reset_request, name="password_reset"),
+    path('add_like/<int:pk>/',views.add_like,name='add_like'),
     
 ]
  
