@@ -1,9 +1,10 @@
+from django.db.models.expressions import Subquery
 from django.shortcuts import redirect, render
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import UpdateView
-from startblog.models import Blogs, Gallery,Likes
+from startblog.models import Blogs, Gallery,Likes,Comments
 from .forms import  BlogsForm, GalleryForm
-from django.db.models import Q
+from django.db.models import Q,FloatField
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode
@@ -12,13 +13,13 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-from django.db.models import Exists,OuterRef
+from django.db.models import Exists,OuterRef,Count,Subquery
 # Create your views here.
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('blogapp:login')
-    blog = Blogs.objects.annotate (is_liked = Exists(Likes.objects.filter(liked_user=request.user,like_status=True,post_id=OuterRef('pk')))).all()
+    blog = Blogs.objects.annotate ( is_liked = Exists(Likes.objects.filter(liked_user=request.user,post__id=OuterRef('pk'))),count =Count('blog_likes')).all()
     context = {'blog':blog}
     return render (request,'startblog/bloghome.html',context)
 
@@ -53,7 +54,6 @@ def blog_update(request,pk):
         form = BlogsForm(request.POST or None, request.FILES, instance=blog)
         if form.is_valid():
             form.save() 
-            print(blog)
             ob = Gallery.objects.filter(blog__title = blog)
             images = request.FILES.getlist('images')
             if images:
@@ -115,8 +115,20 @@ def add_like(request,pk):
                 like = Likes.objects.create(post=blog,like_status=True,liked_user=request.user)
                 return redirect('startblog:home')
         if request.POST.get('like')=='unlike':
-            post = Likes.objects.get(post=blog,liked_user=request.user)
-            print(post)
-            post.like_status = False
-            post.save();
-    return redirect('startblog:home')             
+            Likes.objects.get(post=blog,liked_user=request.user).delete()
+    return redirect('startblog:home') 
+
+def add_comment(request,pk):
+    if request.method=='POST':
+        cmnt = request.POST.get('comment')
+        blog = Blogs.objects.get(pk=pk)
+        coment = Comments.objects.create(post=blog,cmnt=cmnt,comented_by = request.user)
+        coment.save();
+    return redirect('startblog:home')    
+   
+def view_comments(request,pk):
+    blog = Blogs.objects.get(pk=pk)
+    print(blog)
+    coment_list = Comments.objects.filter(post_id=pk)  
+    context = {'coment_list':coment_list,'blog':blog}
+    return render(request,'startblog/view-comments.html',context)

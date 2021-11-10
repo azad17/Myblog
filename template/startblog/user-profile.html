@@ -16,24 +16,14 @@
        <a href="{%url 'blogapp:adminupdate' request.user.pk%}"><b>Edit</b> </a>
        {%endif%}
        <br><a href="{%url 'startblog:pass_change' %}"><b>Update password</b> </a>
-        
-       
       </div>
       </div>
-      </section>
-
+</section>
 
     <div class="container">
-
-      
         <h2>My blogs</h2>
-       
-    
-      </div>
-      
-
+    </div>
 {%for b in blog%}
-
     <section id="about" >
       <div class="container">
         
@@ -41,49 +31,27 @@
             <span class="border ">
           <div class="">
            
-            <img src="{{b.coverpic.url}}" class="img-fluid" alt="">
-            {%for photos in photos%}
+          
+           <a href = "">   <img src="{{b.coverpic.url}}" class="img-thumbnail" alt=""></a>
+    {%for photos in photos%}
       {%if photos.blog == b%}
-      
-      <a href = "{%url 'startblog:image_delete' photos.pk %}">   <img src="{{photos.photo.url}}" class="img-thumbnail" alt=""></a>
-      
-    <a href="{%url 'startblog:image_delete' photos.pk%}" ><button class = "btn btn-primary" type = "submit">Delete</button></a>
-     
+        <a href = "{%url 'startblog:image_delete' photos.pk %}">   <img src="{{photos.photo.url}}" class="img-thumbnail" alt=""></a>
+        <a href="{%url 'startblog:image_delete' photos.pk%}" ><button class = "btn btn-primary" type = "submit">Delete</button></a>
         {%endif%}
-     
-       {%endfor%}
+     {%endfor%}
    
-      
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
-            
             <h3><a href = "{% url 'startblog:blog_update' b.pk %}">{{b.title}}</a></h3>
             <h8> <b>By: {{b.bloger}}</b></h8>
-           
-
           </div>
           <p>
             <b>Content : </b>{{b.content}}<br>
             <b>Private : </b>{{b.personal}}
            </p>
-          
-           
-         
-        
-        </div>
-
-        
-     
+          </div>
     </span>
       </div>
-
-
-   
       {%endfor%}
-   
-   
     </section><!-- End About Section -->
-
-
-  
 {%endblock%}

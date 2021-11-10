@@ -13,6 +13,7 @@ urlpatterns = [
     path('image_delete/<int:pk>/',views.image_delete,name='image_delete'),
     path('password_reset', views.password_reset_request, name="password_reset"),
     path('add_like/<int:pk>/',views.add_like,name='add_like'),
-    
+    path('add_comment/<int:pk>/',views.add_comment,name='add_comment'),
+    path('view_comments/<int:pk>/',views.view_comments,name='view_comments'),
 ]
  
