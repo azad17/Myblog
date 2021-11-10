@@ -1,5 +1,5 @@
 
-{%extends 'blogapp/base.html'%}
+{%extends 'startblog/base.html'%}
 {%load static%}
 {%load static%}
 {%block content%}
@@ -53,7 +53,7 @@
 								</div>
 								
 								<br><div class="w-50 text-md-right">
-									<a href="{%url 'blogapp:forgot_pass' %}">Forgot Password</a>
+									<a href="{%url 'startblog:password_reset' %}">Forgot Password</a>
 									<a href="{%url 'blogapp:register' %}">Register</a>
 								</div>
 	            </div>

@@ -8,9 +8,15 @@
 	<link rel="stylesheet" href="{% static 'blogapp/css/style.css' %}">
 	
     <title>Document</title>
+  
+
 </head>
+
+{%include 'startblog/navbar.html'%}
 <body>
-{%include 'blogapp/navbar.html'%}
+    body {
+        padding-bottom:100px;
+    }
 {%block content%}   
 {%endblock%}
 

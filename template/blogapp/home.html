@@ -1,4 +1,4 @@
-{%extends 'blogapp/base.html'%}
+{%extends 'startblog/base.html'%}
 {%load static%}
 
 <head>
@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 {%block content%}
 <p>
-{%if user.is_authenticated%}
+
 <section class="pt-5 pb-5">
     
   <div class="container">
@@ -17,15 +18,41 @@
       
   <h1><b>Welcome {{request.user}}</b></h1>  <br>
   
- 
+  <section id="services" class="services section-bg">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Admin Panel</h2>
+        
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="icon-box">
+           
+            <h4><a href="{% url 'blogapp:userlist'%}">See Users</a></h4>
+            
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 mt-lg-0">
+          <div class="icon-box">
+            
+            <h4><a href="{%url 'startblog:all_blog'%}">All Blogs</a></h4>
+            
+          </div>
+        </div>
+        <div class="col-md-6 mt-4">
+          <div class="icon-box">
+         
+            <h4><a href="{% url 'blogapp:adminupdate' request.user.pk%}">Update profile</a></h4>
+       
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
   
-  {%if request.user.is_superuser%}
-  <a href="{% url 'blogapp:userlist'%}"><b>See users</a> <br>
-    {%endif%}
-{%else%}
-<a href="{% url 'blogapp:login' %}"> Login First</a>
-{%endif%}    
-<a href="{% url 'blogapp:logout' %}"> <b>Logout</b></a>
-</div>
-</section>
+
 {%endblock%}

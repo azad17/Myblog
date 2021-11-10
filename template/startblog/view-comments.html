@@ -1,0 +1,39 @@
+{%extends 'startblog/base.html'%}
+{%load static%}
+{%block content%}
+
+<section >
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-6">
+          <img src="{{blog.coverpic.url}}" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0">
+          <h3>{{blog.title}}</h3>
+          
+          <h8> <b>By: {{blog.bloger}}</b></h8>
+          <p>
+           
+           {{blog.content}}<br>
+        </section>
+{%for cm in coment_list%}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            
+            By:{{cm.comented_by}}
+        </div>
+        <div class="card-body">
+        
+          <p class="card-text">{{cm.cmnt}}</p>
+          
+        </div>
+      </div> 
+    </div>
+    <br>
+             
+{%endfor%}   
+   
+
+{%endblock%}

@@ -35,35 +35,11 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)                      
-            return redirect('blogapp:home')
+            return redirect('startblog:home')
         else:
             messages.info(request,'Username/Password is Incorrect')
             redirect('blogapp:login')
     return render(request,'blogapp/login.html')  
-
-def forgot_pass(request):
-    if request.method=='POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        newpassword= request.POST.get('newpassword') 
-        confirmpassword = request.POST.get('confirmpassword') 
-        try:
-            user = User.objects.get(username=username,email=email)
-        except:
-            messages.info(request,"Couldn't find user")
-            return redirect('blogapp:forgot_pass') 
-        if user is not None:
-            if newpassword!=confirmpassword:
-                messages.info(request,'Password not matching') 
-                return redirect('blogapp:forgot_pass')  
-            if len(newpassword)<7 or not any(pas.isdigit() for pas in newpassword) or not any(pas.isalpha() for pas in newpassword):
-                messages.info(request,'Password should have a length of 8 and contains alphanumeric values') 
-                return redirect('blogapp:forgot_pass')    
-            user.set_password(newpassword)
-            user.save();
-            messages.info(request,'Password has been changed')
-            return redirect('blogapp:login')             
-    return render(request,'blogapp/forgot_pass.html')
 
 def user_logout(request):
     logout(request)
@@ -81,10 +57,18 @@ class  UserDetails(DetailView):
 
 class UserUpdate(UpdateView):
     model = User
-    fields = ('username','email','is_superuser')
+    fields = ('username','email')
     template_name = 'blogapp/userupdate.html'    
     def get_success_url(self):
         return reverse_lazy('blogapp:userdetails',kwargs = {'pk':self.object.id})
+
+class AdminUpdate(UpdateView):
+    model = User
+    exclude = ('password',)
+    fields = ('username','first_name','last_name','is_superuser','email','is_staff','user_permissions')    
+    template_name = 'blogapp/adminupdate.html'    
+    def get_success_url(self):
+        return reverse_lazy('blogapp:home')
 
 class UserDelete(DeleteView):
     model = User

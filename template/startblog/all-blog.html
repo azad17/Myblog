@@ -1,0 +1,49 @@
+{%extends 'startblog/base.html'%}
+{%load static%}
+{%block content%}
+
+
+<!-- ======= About Section ======= -->
+
+<section >
+    <div class="container">
+
+      <div class="">
+        <h2>All blogs</h2>
+       
+      </div>
+      </div>
+      </section>
+
+    {%for ob in blog%}
+
+    <section id="about" >
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="{{ob.coverpic.url}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <h3><a href = "{% url 'startblog:blog_update' ob.pk %}">{{ob.title}}</a></h3>
+            <h8> <b>By: {{ob.bloger}}</b></h8>
+            <p>
+             {{ob.content}}
+            </p>
+            
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+    {%endfor%}
+  
+
+</div>
+</div>
+
+</div>
+</section><!-- End About Section -->
+
+
+{%endblock%}
