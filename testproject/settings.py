@@ -78,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'testproject.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True 
 # EMAIL_HOST = 'smtp.gmail.com' 
@@ -86,8 +86,25 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = 'admin@gmail.com' 
 # EMAIL_HOST_PASSWORD = '******' 
 # DEFAULT_FROM_EMAIL = 'testing@testing.com',
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'senderemail'
+EMAIL_HOST_PASSWORD = 'senderpassword'
+EMAIL_PORT = 587
+EMAIL_USER_SSL = False
+EMAIL_USE_TLS = True
+
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
 
 DATABASES = {
     'default': {

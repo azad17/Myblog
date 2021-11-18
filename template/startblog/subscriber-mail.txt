@@ -1,0 +1,15 @@
+{% autoescape off %}
+Hello,
+
+Hey .  Checkout the new blog by {{user}} posted just now 
+about : {{blog}}
+See post : {{ protocol }}://{{ domain }}/{{path}}/{{pk}}
+
+
+
+If you did not make this request, you can simply ignore this email.
+
+Sincerely,
+The Website Team
+
+{% endautoescape %}

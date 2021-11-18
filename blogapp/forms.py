@@ -4,16 +4,17 @@ from django.forms import ModelForm, widgets
 from django import conf, forms
 import string
 
+
 class PasswordInput(forms.PasswordInput):
-    input_type='password'
+    input_type = 'password'
+
 
 class UserForm(ModelForm):
-    confirm_password = forms.CharField(widget = forms.PasswordInput)    
+    confirm_password = forms.CharField(widget=forms.PasswordInput)    
     
     class Meta:
         model = User
-        
-        fields = ('username','email','password','confirm_password')
+        fields = ('username', 'email', 'password', 'confirm_password')
         widgets = {'password':forms.PasswordInput()}
     
     def save(self):
@@ -28,9 +29,11 @@ class UserForm(ModelForm):
         password = self.cleaned_data.get('password')
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
+        '''password validation'''
         if not username[0].isalpha():
             raise forms.ValidationError('Username Should start with Letter')
-        if len(password)<7 or not any(pas.isdigit() for pas in password) or not any(pas.isalpha() for pas in password):          
+        if len(password)<7 or not any(pas.isdigit() for pas in password) or not any(pas.isalpha() 
+                for pas in password):          
                 raise forms.ValidationError("password should have a leangth of 8 and contains alphanumeric values")
         if password!=confirm_password:
             raise forms.ValidationError('password not matching')
