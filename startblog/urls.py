@@ -3,6 +3,7 @@ from .import views
 from django.contrib.auth import views as auth_views
 
 app_name='startblog'
+
 urlpatterns = [
     path('',views.home,name='home'),
     path('add_blog',views.add_blog,name='add_blog'),
@@ -15,5 +16,8 @@ urlpatterns = [
     path('add_like/<int:pk>/',views.add_like,name='add_like'),
     path('add_comment/<int:pk>/',views.add_comment,name='add_comment'),
     path('view_comments/<int:pk>/',views.view_comments,name='view_comments'),
+    path('comment_delete/<int:pk>/',views.comment_delete,name='comment_delete'),
+    path('bloger_profile/<int:pk>/',views.bloger_profile,name='bloger_profile'),
+    
 ]
  

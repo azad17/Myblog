@@ -10,7 +10,6 @@ class Blogs(models.Model):
     content = models.TextField(max_length=1000)
     personal = models.BooleanField()
     
-
     def __str__(self):
         return str(self.title)
 
@@ -19,6 +18,7 @@ class Likes(models.Model):
     like_status = models.BooleanField(default=False)
     liked_user = models.ForeignKey(User,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return str(self.like_status)
         
@@ -31,4 +31,9 @@ class Gallery(models.Model):
     blog = models.ForeignKey(Blogs,on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='galery')  
     def __str__(self):
-        return str(self.blog)      
+        return str(self.blog)   
+
+class Subscriber(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    sub = models.EmailField()
+

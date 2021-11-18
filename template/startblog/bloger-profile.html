@@ -1,0 +1,49 @@
+{%extends 'startblog/base.html'%}
+{%load static%}
+{%block content%}
+
+
+<section>
+    <div class="container">
+        <h2>Blogs of {{user}} </h2>
+        <form method='post' action= "{% url 'startblog:bloger_profile' request.user.id  %}" >
+            {%csrf_token%}
+          
+            <input type="email"  name = 'sub' class="form-control" placeholder ="Your Mail Id"required>
+            <input type ="submit"  class="btn btn-danger" value = 'Subscribe'>
+         
+        </form>
+    </div>
+{%for b in blogs%}
+    <section id="about" >
+      <div class="container">
+        
+        <div class="row">
+            <span class="border ">
+          <div class="">    
+           
+          
+           <a href = "{%url 'startblog:view_comments' b.id%}">   <img src="{{b.coverpic.url}}" class="img-thumbnail" alt=""></a>
+    {%for photos in photos%}
+      {%if photos.blog == b%}
+   <img src="{{photos.photo.url}}" class="img-thumbnail" alt="">
+        
+        {%endif%}
+     {%endfor%}
+   
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <h3>{{b.title}}</h3>
+            <h8> <b>By: {{b.bloger}}</b></h8>
+          </div>
+          <p>
+            <b>Content : </b>{{b.content}}<br>
+            <b>Private : </b>{{b.personal}}
+           </p>
+          </div>
+    </span>
+      </div>
+      {%endfor%}
+    </section><!-- End About Section -->
+    </section>
+{%endblock%}

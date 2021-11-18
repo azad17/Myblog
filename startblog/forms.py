@@ -8,7 +8,10 @@ class BlogsForm(ModelForm):
     class Meta:
         model = Blogs
         fields = ('bloger','coverpic','title','content','personal')
-        widgets = {'bloger':widgets.HiddenInput,'content':widgets.Textarea}
+    '''making bloger field read only'''    
+    def __init__(self, *args, **kwargs):
+        super(BlogsForm, self).__init__(*args, **kwargs)
+        self.fields['bloger'].disabled = True    
  
 class GalleryForm(ModelForm):
 

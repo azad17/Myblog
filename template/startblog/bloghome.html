@@ -31,7 +31,7 @@
       </div>
       <div class="col-lg-6 pt-4 pt-lg-0">
         <h3>{{ob.title}}</h3>
-        <h8> <b>By: {{ob.bloger}}</b></h8>
+      <a href="{%url 'startblog:bloger_profile' ob.bloger.id %}" > <h8>By: <b> {{ob.bloger}}</b></h8> </a>
         <p> {{ob.content}}<br>
     
         <form action="{%url 'startblog:add_like' ob.id%}" method="post">

@@ -32,7 +32,7 @@
           <div class="">
            
           
-           <a href = "">   <img src="{{b.coverpic.url}}" class="img-thumbnail" alt=""></a>
+           <a href = "{%url 'startblog:view_comments' b.id%}">   <img src="{{b.coverpic.url}}" class="img-thumbnail" alt=""></a>
     {%for photos in photos%}
       {%if photos.blog == b%}
         <a href = "{%url 'startblog:image_delete' photos.pk %}">   <img src="{{photos.photo.url}}" class="img-thumbnail" alt=""></a>
