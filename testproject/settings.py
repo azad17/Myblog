@@ -24,7 +24,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = 'django-insecure-63r*#u&!w$pl&azu!6k)u(1mocl$zuo97$72ls$3m1uqea=9ie'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['206.189.142.184'] 
 
@@ -106,25 +106,25 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'blogdb',
-            'USER': 'postgres',
-            'PASSWORD': 'postgrepassword',
-        }
-    }
-else:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myblogdb',
-        'USER': 'blog_admin',
-        'PASSWORD': 'myblogdbpassword',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'blogdb',
+#             'USER': 'postgres',
+#             'PASSWORD': 'postgrepassword',
+#         }
+#     }
+# else:
+DATABASES = {
+'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'myblogdb',
+    'USER': 'blog_admin',
+    'PASSWORD': 'myblogdbpassword',
+    'HOST': 'localhost',
+    'PORT': '',
+}
 }
 
 # Password validation
